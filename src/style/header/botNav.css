@@ -1,0 +1,39 @@
+.BotNav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    line-height: 2;
+    font-weight: 500;
+    letter-spacing: .025em;
+    background: #151515;
+}
+li{
+    padding: 15px 20px;
+}
+.BotNav_ul1{
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+}
+.BotNav_ul1>li{
+    border-radius: 5% ;
+    color: white;
+    padding: 15px 20px;
+}
+.BotNav_ul2{
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+.BotNav_ul2>li{
+    font-size: 15px;
+    color: white;
+    padding: 10px 20px;
+}
+
+.focus{
+    background: #4b5055;
+    
+
+}

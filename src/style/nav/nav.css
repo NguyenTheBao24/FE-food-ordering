@@ -1,0 +1,78 @@
+.nav{
+    display: flex;  
+    justify-content: space-around; 
+    /* align-items: center; */
+    flex-wrap: wrap;
+    /* margin: 5px 20px; */
+}
+.menu {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    width: calc(25% - 10px);
+    margin-bottom: 20px;
+}
+.container_titel{
+    margin: 50px auto;
+    display: flex;
+    text-align: center;
+   justify-content: space-evenly;
+
+}
+.container_box{
+    width: 200px;
+    border-bottom: 2px solid red;
+}
+.container_titel_lite p{
+    font-weight: 900;
+}
+.menu_btn  {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end; /* Để nút nằm ở dưới */
+    margin-top: 10px;
+}
+
+
+/* .menu_btn button:hover {
+    background-color: #2980b9;
+    transform: scale(1.1);
+} */
+.nav_container{
+    width: 100%;
+}
+.show_more_btn {
+    border-radius: 5px;
+    width: 150px;
+    text-align: center;
+    background-color: rgb(255, 219, 115);
+    color: white;
+    padding: 8px 16px; /* Điều chỉnh kích thước nút */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-bottom: 5px; /* Khoảng cách dưới nút */
+    margin-right: 55px;
+}
+.show_more_btn:hover {
+    background-color: rgb(255, 206, 64);
+    transform: scale(1.1);
+}
+.show_less_btn {
+    width: 150px;
+    border-radius: 5px;
+
+    text-align: center;
+    background-color: #f67567;
+    padding: 8px 16px; /* Điều chỉnh kích thước nút */
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-right: 55px;
+    margin-bottom: 5px; /* Khoảng cách dưới nút */
+}
+.show_less_btn:hover {
+    background-color: #b64d41;
+    transform: scale(1.1);
+}   

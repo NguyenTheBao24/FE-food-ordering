@@ -1,0 +1,19 @@
+.thumbnail-slider {
+height: 400px; /* Chiều cao tối đa cho phần tử cha */
+}
+
+.image-container {
+  width: 100%;
+  max-height: 100%; /* Chiều cao tối đa cho phần tử con */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.thumbnail-image {
+  /* Đảm bảo ảnh không vượt quá kích thước của phần tử con */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
