@@ -22,8 +22,14 @@ const Body = () => {
 
 
             <div className="container_card">
+                <div className="container_card_1">
+
                 <SwiperCardCarousel cards={cards} ></SwiperCardCarousel>
+                </div>
+                <div className="container_card_2">
+
                 <SwiperCardCarousel cards={cards} ></SwiperCardCarousel>
+                </div>
             </div>
 
         </div>

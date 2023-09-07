@@ -1,11 +1,16 @@
 /* swiper.css */
 .swiper-card {
-  /* width: 100%;
-  height: 100%; */
-  /* object-fit:contain; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .mySwiper{
-  width:600px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
    object-fit:contain;
 }

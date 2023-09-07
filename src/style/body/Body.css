@@ -11,6 +11,10 @@
     padding: 80px 20px;
     justify-content: space-evenly;
 }
+.container_card_1 , .container_card_2{
+    width: 600px;
+    height: 300px;
+}
 .container_box{
     width: 200px;
     border-bottom: 2px solid red;
