@@ -11,10 +11,31 @@ function BotNav() {
     return <>
         <div className="BotNav">
             <ul className="BotNav_ul1" >
-                <li className={clicked === 1 ?"focus" : "" } onClick={()=>handlClicked(1)}>HOME</li>
-                <li className={clicked === 2 ?"focus" : "" } onClick={()=>handlClicked(2)}>ABOUT US </li>
-                <li className={clicked === 3 ?"focus" : "" } onClick={()=>handlClicked(3)} > ROOMS</li>
-                <li className={clicked === 4 ?"focus" : "" }onClick={()=>handlClicked(4)}> CONTACT US</li>
+                <li className={clicked === 1 ?"focus" : "" } onClick={()=>handlClicked(1)}>
+                    <a href="#">
+
+                    HOME
+                    </a>
+                    
+                    </li>
+                <li className={clicked === 2 ?"focus" : "" } onClick={()=>handlClicked(2)}>
+                        <a href="#body">
+                    ABOUT US
+                        </a>
+                    
+                     </li>
+                <li className={clicked === 3 ?"focus" : "" } onClick={()=>handlClicked(3)} >
+                    <a href="#nav">
+
+                     ROOMS
+                    </a>
+                     </li>
+                <li className={clicked === 4 ?"focus" : "" }onClick={()=>handlClicked(4)}> 
+                <a href="#food">
+
+                CONTACT US
+                </a>
+                </li>
                 <li className={clicked === 5 ?"focus" : "" } onClick={()=>handlClicked(5)}> LOGIN</li>
 
 

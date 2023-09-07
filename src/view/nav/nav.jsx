@@ -1,93 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Menu from "../../components/menu";
+import { fetchMenuData } from "../../services/nav/menu";
+import axios from 'axios';
 import './../../style/nav/nav.css'
 
 
 const Nav = () => {
-    const data = [
+    const [data, setData] = useState([]);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+          const menuData = await fetchMenuData();
+          setData(menuData);
+        };
+    
+        fetchData();
+      }, []);
 
-
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        }, {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        }, {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        }, {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-        {
-            image: 'https://launamgiakhanh.vn/wp-content/uploads/2019/07/39ab4115a93763693a26-1024x683-1.jpg',
-            name: 'Combo 6 người',
-            price: '1519000Đ'
-        },
-    ];
     const itemsPerPage = 8;
-    const totalItems = data.length;
+    const totalItems = data ? data.length : 0;
 
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
 
@@ -98,7 +30,7 @@ const Nav = () => {
     const showMoreButton = visibleItems < totalItems;
 
     return <>
-        <div className="nav_container">
+        <div className="nav_container" id='nav'>
 
             <div className="container_titel">
                 <div className="container_box"></div>

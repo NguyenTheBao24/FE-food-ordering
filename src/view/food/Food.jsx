@@ -6,7 +6,7 @@ import { AiOutlineMail,AiOutlineUser } from 'react-icons/ai'
 
 
 const Food = () => {
-    return <div className="Food">
+    return <div className="Food" id='food'>
         <div className="food_1">
             <p>CONTACT US</p>
             <ul>
