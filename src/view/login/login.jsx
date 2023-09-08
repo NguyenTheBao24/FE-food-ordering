@@ -21,14 +21,16 @@ function LoginForm() {
     event.preventDefault();
 
     const reservationData = {
-      usernam: "admin",
-      password: "admin"
+      username: username,
+      password: password
     }
     try {
       const response = await sendReservationData(reservationData);
-
       console.log(response);
+
     } catch (error) {
+      
+
     }
 
 

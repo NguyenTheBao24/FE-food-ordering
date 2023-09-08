@@ -9,6 +9,7 @@ export const sendReservationData = async (reservationData) => {
     );
     return response.data;
   } catch (error) {
+    
     throw error;
   }
 };
