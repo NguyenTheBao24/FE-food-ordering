@@ -38,7 +38,7 @@ function BotNav() {
                     </a>
                 </li>
                 <li className={clicked === 5 ? "focus" : ""} onClick={() => handlClicked(5)}>
-                    <Link to="/Loginnv">
+                    <Link to="/login">
                         LOGIN
                     </Link>
                 </li>
