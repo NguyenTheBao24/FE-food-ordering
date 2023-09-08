@@ -1,42 +1,47 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import './../../style/header/botNav.css'
 import { FaFacebookF, FaTelegramPlane, FaInstagram } from 'react-icons/fa'
 import { useState } from "react"
 
 function BotNav() {
-    const [ clicked, setClicked] = useState(1);
+    const [clicked, setClicked] = useState(1);
     const handlClicked = (index) => {
-        setClicked(index); 
-      };
+        setClicked(index);
+    };
     return <>
         <div className="BotNav">
             <ul className="BotNav_ul1" >
-                <li className={clicked === 1 ?"focus" : "" } onClick={()=>handlClicked(1)}>
+                <li className={clicked === 1 ? "focus" : ""} onClick={() => handlClicked(1)}>
                     <a href="#">
 
-                    HOME
+                        HOME
                     </a>
-                    
-                    </li>
-                <li className={clicked === 2 ?"focus" : "" } onClick={()=>handlClicked(2)}>
-                        <a href="#body">
-                    ABOUT US
-                        </a>
-                    
-                     </li>
-                <li className={clicked === 3 ?"focus" : "" } onClick={()=>handlClicked(3)} >
+
+                </li>
+                <li className={clicked === 2 ? "focus" : ""} onClick={() => handlClicked(2)}>
+                    <a href="#body">
+                        ABOUT US
+                    </a>
+
+                </li>
+                <li className={clicked === 3 ? "focus" : ""} onClick={() => handlClicked(3)} >
                     <a href="#nav">
 
-                     ROOMS
+                        ROOMS
                     </a>
-                     </li>
-                <li className={clicked === 4 ?"focus" : "" }onClick={()=>handlClicked(4)}> 
-                <a href="#food">
-
-                CONTACT US
-                </a>
                 </li>
-                <li className={clicked === 5 ?"focus" : "" } onClick={()=>handlClicked(5)}> LOGIN</li>
+                <li className={clicked === 4 ? "focus" : ""} onClick={() => handlClicked(4)}>
+                    <a href="#food">
+
+                        CONTACT US
+                    </a>
+                </li>
+                <li className={clicked === 5 ? "focus" : ""} onClick={() => handlClicked(5)}>
+                    <Link to="/Loginnv">
+                        LOGIN
+                    </Link>
+                </li>
 
 
             </ul>
