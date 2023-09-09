@@ -12,8 +12,17 @@ function Order() {
         { id: 3, name: "Bàn 3", isReserved: true },
         { id: 4, name: "Bàn 4", isReserved: false },
     ]);
-    const [showAddItemModal, setShowAddItemModal] = useState(false); // Thêm trạng thái này
+    const [showAddItemModal, setShowAddItemModal] = useState(false);
+    const [openedTableId, setOpenedTableId] = useState(null);
 
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const updateTotalPrice = (newTotalPrice) => {
+        setTotalPrice(newTotalPrice);
+
+
+        console.log(totalPrice);
+    };
     const navigate = useNavigate();
 
 
@@ -38,12 +47,16 @@ function Order() {
         );
         setTables(updatedTables);
     };
-    const handleOpenAddItemModal = () => {
+    const handleOpenAddItemModal = (tableId) => {
         setShowAddItemModal(true);
+        setOpenedTableId(tableId);
+        // console.log(totalPrice);
     };
+
 
     const handleCloseAddItemModal = () => {
         setShowAddItemModal(false);
+        console.log(totalPrice);
     };
 
     return (
@@ -78,16 +91,21 @@ function Order() {
                                     )}
                                 </td>
                                 <td>
-                                    <button className="add-item-button" onClick={handleOpenAddItemModal}>
-                                        Thêm món
-                                    </button>
-                                    {showAddItemModal && (
-                                        <div className="upbook-modal">
-                                            <MenuOrder></MenuOrder>
-                                            <button onClick={handleCloseAddItemModal}>Đóng</button>
-                                        </div>
-                                    )}
+                                    <div>
+                                        <button className="add-item-button" onClick={() => handleOpenAddItemModal(table.id)}>
+                                            Thêm món
+                                        </button>
+                                        {showAddItemModal && openedTableId === table.id && (
+                                            <MenuOrder
+                                                handleClose={() => setShowAddItemModal(false)}
+                                                setShowAddItemModal={setShowAddItemModal}
+                                                tableNumber={table.id}
+                                                updateTotalPrice={updateTotalPrice}
 
+
+                                            />
+                                        )}
+                                    </div>
                                 </td>
                                 <td>
                                     <div className="payment-column">
@@ -100,6 +118,7 @@ function Order() {
                                 </td>
                             </tr>
                         ))}
+
                     </tbody>
                 </table>
             </div>
