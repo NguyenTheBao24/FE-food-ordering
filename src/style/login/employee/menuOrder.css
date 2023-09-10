@@ -24,7 +24,7 @@
     margin-bottom: 20px;
   }
   
-  .menu-items ul {
+  .menu-items  {
     list-style: none;
     padding: 0;
   }
@@ -54,26 +54,22 @@
     margin-top: 20px;
     text-align: right;
   }
-  /* Thêm CSS này vào menuOrder.css */
+
+
+  
 .upbook-modal button {
-    float: right;
-  }
-  .menu-items {
-    list-style: none;
-    padding: 0;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  float: right;
 }
 
-.menu-items li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+.upbook-modal button:hover {
+  background-color: #0056b3;
 }
 
-.item-quantity {
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 50%;
-    padding: 3px 8px;
-    font-size: 12px;
-}
+

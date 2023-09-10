@@ -5,9 +5,9 @@ import "./../../../../style/login/employee/menuOrder.css";
 
 function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many }) {
     const [menuItems, setMenuItems] = useState([
-        { id: 1, name: "Món 1", price: 10, quantity: 0, totalPriceForTable: 0 },
-        { id: 2, name: "Món 2", price: 15, quantity: 0, totalPriceForTable: 0 },
-        { id: 3, name: "Món 3", price: 20, quantity: 0, totalPriceForTable: 0 },
+        { id: 1, name: "Món 1", price: 10, quantityRemaining: 0, totalPriceForTable: 0 },
+        { id: 2, name: "Món 2", price: 15, quantityRemaining: 0, totalPriceForTable: 0 },
+        { id: 3, name: "Món 3", price: 20, quantityRemaining: 0, totalPriceForTable: 0 },
     ]);
 
     const [totalPrice, setTotalPrice] = useState(many);
@@ -27,7 +27,7 @@ function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many }) {
     const handleAddItem = (item) => {
         const menuItem = menuItems.find((menuItem) => menuItem.id === item.id);
 
-        menuItem.quantity++;
+        menuItem.quantityRemaining++;
         menuItem.totalPriceForTable += item.price;
         setMenuItems([...menuItems]);
 
@@ -37,16 +37,18 @@ function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many }) {
     const handleRemoveItem = (item) => {
         const menuItem = menuItems.find((menuItem) => menuItem.id === item.id);
 
-        menuItem.quantity--;
+
+        menuItem.quantityRemaining--;
         menuItem.totalPriceForTable -= item.price;
         setMenuItems([...menuItems]);
+
 
         calculateTotalPrice();
     };
 
     const calculateTotalPrice = () => {
         const total = menuItems.reduce(
-            (acc, item) => acc + item.price * item.quantity,
+            (acc, item) => acc + item.price * item.quantityRemaining,
             many
         );
         setTotalPrice(total);
