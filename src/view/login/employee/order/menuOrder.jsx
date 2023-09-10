@@ -3,49 +3,51 @@ import "./../../../../style/login/employee/menuOrder.css";
 
 
 
-function MenuOrder({ handleClose, setShowAddItemModal, updateTotalPrice }) {
+function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many }) {
     const [menuItems, setMenuItems] = useState([
-        { id: 1, name: "Món 1", price: 10, quantity: 0 },
-        { id: 2, name: "Món 2", price: 15, quantity: 0 },
-        { id: 3, name: "Món 3", price: 20, quantity: 0 },
+        { id: 1, name: "Món 1", price: 10, quantity: 0, totalPriceForTable: 0 },
+        { id: 2, name: "Món 2", price: 15, quantity: 0, totalPriceForTable: 0 },
+        { id: 3, name: "Món 3", price: 20, quantity: 0, totalPriceForTable: 0 },
     ]);
 
-    const [selectedItems, setSelectedItems] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
-    const [isClosed, setIsClosed] = useState(false); // State để kiểm tra mục đã đóng
+    const [totalPrice, setTotalPrice] = useState(many);
+    const [isClosed, setIsClosed] = useState(false);
 
     const handleCloseMenuOrder = () => {
-        handleClose();
+
         setShowAddItemModal(false);
         setIsClosed(true);
-        const total = menuItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-        updateTotalPrice(total);//
+
+        const totalForTable = menuItems.reduce((acc, item) => acc + item.totalPriceForTable, many);
+        updateTotalPrice(tableId, totalForTable);
 
     };
 
     const handleAddItem = (item) => {
         const menuItem = menuItems.find((menuItem) => menuItem.id === item.id);
-        if (menuItem) {
-            menuItem.quantity++;
-            setMenuItems([...menuItems]);
-        }
+
+        menuItem.quantity++;
+        menuItem.totalPriceForTable += item.price;
+        setMenuItems([...menuItems]);
+
         calculateTotalPrice();
     };
 
     const handleRemoveItem = (item) => {
         const menuItem = menuItems.find((menuItem) => menuItem.id === item.id);
-        if (menuItem && menuItem.quantity > 0) {
-            menuItem.quantity--;
-            setMenuItems([...menuItems]);
-        }
+
+        menuItem.quantity--;
+        menuItem.totalPriceForTable -= item.price;
+        setMenuItems([...menuItems]);
+
         calculateTotalPrice();
     };
 
     const calculateTotalPrice = () => {
         const total = menuItems.reduce(
             (acc, item) => acc + item.price * item.quantity,
-            0
+            many
         );
         setTotalPrice(total);
 
@@ -60,7 +62,6 @@ function MenuOrder({ handleClose, setShowAddItemModal, updateTotalPrice }) {
                     {menuItems.map((item) => (
                         <li key={item.id}>
                             {item.name} - {item.price} VNĐ
-                            <span className="item-quantity">{item.quantity}</span>
                             <button onClick={() => handleAddItem(item)}>Thêm món</button>
                             <button onClick={() => handleRemoveItem(item)}>Bớt món</button>
                         </li>

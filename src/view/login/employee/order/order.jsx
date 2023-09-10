@@ -7,37 +7,27 @@ import MenuOrder from "./menuOrder";
 
 function Order() {
     const [tables, setTables] = useState([
-        { id: 1, name: "Bàn 1", isReserved: true },
-        { id: 2, name: "Bàn 2", isReserved: false },
-        { id: 3, name: "Bàn 3", isReserved: true },
-        { id: 4, name: "Bàn 4", isReserved: false },
+        { id: 1, name: "Bàn 1", isReserved: true, total: 0 },
+        { id: 2, name: "Bàn 2", isReserved: false, total: 0 },
+        { id: 3, name: "Bàn 3", isReserved: true, total: 0 },
+        { id: 4, name: "Bàn 4", isReserved: false, total: 0 },
     ]);
+
     const [showAddItemModal, setShowAddItemModal] = useState(false);
     const [openedTableId, setOpenedTableId] = useState(null);
 
-    const [totalPrice, setTotalPrice] = useState(0);
+    // const [totalPrice, setTotalPrice] = useState(0);
 
-    const updateTotalPrice = (newTotalPrice) => {
-        setTotalPrice(newTotalPrice);
-
-
-        console.log(totalPrice);
-    };
-    const navigate = useNavigate();
-
-
-    const handleLogout = () => {
-        navigate('/login');
-    };
-
-    const handleReservation = (tableId) => {
-        // Xử lý khi người dùng đặt bàn cho bàn có id là tableId
-        // Có thể thêm logic xử lý đặt bàn ở đây
+    const updateTotalPrice = (tableNumber,newTotalPrice) => {
         const updatedTables = tables.map((table) =>
-            table.id === tableId ? { ...table, isReserving: true } : table
+            table.id === tableNumber ? { ...table, total: newTotalPrice } : table
         );
+     
+    
         setTables(updatedTables);
     };
+
+
 
     const handlePayment = (tableId) => {
         // Xử lý khi người dùng tính tiền cho bàn có id là tableId
@@ -46,18 +36,14 @@ function Order() {
             table.id === tableId ? { ...table, isPaying: true } : table
         );
         setTables(updatedTables);
+       
     };
     const handleOpenAddItemModal = (tableId) => {
         setShowAddItemModal(true);
         setOpenedTableId(tableId);
-        // console.log(totalPrice);
     };
 
 
-    const handleCloseAddItemModal = () => {
-        setShowAddItemModal(false);
-        console.log(totalPrice);
-    };
 
     return (
 
@@ -94,14 +80,15 @@ function Order() {
                                     <div>
                                         <button className="add-item-button" onClick={() => handleOpenAddItemModal(table.id)}>
                                             Thêm món
+                                            <span>{table.total}</span>
                                         </button>
                                         {showAddItemModal && openedTableId === table.id && (
-                                            <MenuOrder
-                                                handleClose={() => setShowAddItemModal(false)}
-                                                setShowAddItemModal={setShowAddItemModal}
-                                                tableNumber={table.id}
-                                                updateTotalPrice={updateTotalPrice}
 
+                                            <MenuOrder
+                                                setShowAddItemModal={setShowAddItemModal}
+                                                updateTotalPrice={updateTotalPrice}
+                                                tableId ={table.id}
+                                                many={table.total}
 
                                             />
                                         )}
