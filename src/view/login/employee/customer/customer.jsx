@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
 
 import './../../../../style/login/employee/customer.css';
 
 function Customer() {
     // Dữ liệu mẫu cho danh sách bàn ăn
-    const tables = [
+    const initialTables = [
         {
             id: 1,
             name: "Nguyễn Văn A",
@@ -24,8 +24,33 @@ function Customer() {
             SDT: "0869346831",
             dateTime: "2023-09-11 03:15 PM",
         },
-
     ];
+
+    const [tables, setTables] = useState(initialTables);
+    const [reservedTables, setReservedTables] = useState({});
+
+    // Hàm để xử lý khi đặt bàn
+    const reserveTable = (tableId) => {
+        const selectedTable = tables.find((table) => table.id === tableId);
+        if (selectedTable) {
+            setReservedTables( selectedTable);
+            // Xoá bàn đã đặt ra khỏi danh sách ban đầu
+            const updatedTables = tables.filter((table) => table.id !== tableId);
+            setTables(updatedTables);
+        }
+    
+    };
+
+    // Hàm để xử lý khi huỷ bàn
+    const cancelTable = (tableId) => {
+
+
+        const updatedTables = tables.filter((table) => table.id !== tableId);
+        setTables(updatedTables);
+
+    };
+    console.log(reservedTables);
+
 
     return (
         <>
@@ -55,10 +80,14 @@ function Customer() {
                                     </td>
                                     <td>{table.dateTime}</td>
                                     <td>
-                                        <button className="button-reserve">Đặt Bàn</button>
+                                        <button className="button-reserve" onClick={() => reserveTable(table.id)}>
+                                            Đặt Bàn
+                                        </button>
                                     </td>
                                     <td>
-                                        <button className="button-cancel">Huỷ Bàn</button>
+                                        <button className="button-cancel" onClick={() => cancelTable(table.id)}>
+                                            Huỷ Bàn
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
