@@ -4,6 +4,7 @@ import { BrowserRouter as Router, useNavigate } from 'react-router-dom'; // Impo
 
 import "./../../../../style/login/employee/order.css";
 import MenuOrder from "./menuOrder";
+import Pay from "./Pay";
 
 function Order() {
     const [tables, setTables] = useState([
@@ -15,28 +16,26 @@ function Order() {
 
     const [showAddItemModal, setShowAddItemModal] = useState(false);
     const [openedTableId, setOpenedTableId] = useState(null);
+    const [showAddItemModalPay, setShowAddItemModalPay] = useState(false);
+    const [openedTableIdPay, setOpenedTableIdPay] = useState(null);
 
-    // const [totalPrice, setTotalPrice] = useState(0);
 
-    const updateTotalPrice = (tableNumber,newTotalPrice) => {
+    const updateTotalPrice = (tableNumber, newTotalPrice) => {
         const updatedTables = tables.map((table) =>
             table.id === tableNumber ? { ...table, total: newTotalPrice } : table
         );
-     
-    
+
+
         setTables(updatedTables);
     };
 
 
 
     const handlePayment = (tableId) => {
-        // Xử lý khi người dùng tính tiền cho bàn có id là tableId
-        // Có thể thêm logic xử lý tính tiền ở đây
-        const updatedTables = tables.map((table) =>
-            table.id === tableId ? { ...table, isPaying: true } : table
-        );
-        setTables(updatedTables);
-       
+
+        setShowAddItemModalPay(true)
+        setOpenedTableIdPay(tableId);
+
     };
     const handleOpenAddItemModal = (tableId) => {
         setShowAddItemModal(true);
@@ -87,7 +86,7 @@ function Order() {
                                             <MenuOrder
                                                 setShowAddItemModal={setShowAddItemModal}
                                                 updateTotalPrice={updateTotalPrice}
-                                                tableId ={table.id}
+                                                tableId={table.id}
                                                 many={table.total}
 
                                             />
@@ -96,11 +95,22 @@ function Order() {
                                 </td>
                                 <td>
                                     <div className="payment-column">
-                                        {table.isPaying ? (
-                                            <button className="payment-button" disabled>Tính Tiền</button>
-                                        ) : (
-                                            <button className="payment-button" onClick={() => handlePayment(table.id)}>Tính Tiền</button>
-                                        )}
+
+                                        {table.isReserved ? (
+                                            <button className="payment-button" onClick={() => handlePayment(table.id)}>Thanh Toán </button>
+                                        ) : null
+                                        }
+                                        {
+                                            showAddItemModalPay && openedTableIdPay === table.id && (
+                                                <Pay
+                                                    setShowAddItemModalPay={setShowAddItemModalPay}
+                                                    totalAmount={table.total}
+                                                    updateTotalPrice={updateTotalPrice}
+                                                    tableId={table.id}
+                                                />
+                                            )
+                                        }
+
                                     </div>
                                 </td>
                             </tr>
