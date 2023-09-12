@@ -2,12 +2,12 @@ import axios from 'axios';
 
 export const fetchMenuData = async () => {
   try {
-    const response = await axios.get('https://charming-shirt-production.up.railway.app/api/menu');
+    const response = await axios.get('https://pttkpmn05project3-production.up.railway.app/api/menu');
 
     const data =response.data.data;
 
     const modifiedData = data.map(item => {
-      item.imageUrl = 'https://charming-shirt-production.up.railway.app/api/menu/'+item.imageUrl; // Thay 'URL_MỚI' bằng chuỗi mới bạn muốn sử dụng
+      item.imageUrl = 'https://pttkpmn05project3-production.up.railway.app/api/menu/'+item.imageUrl; // Thay 'URL_MỚI' bằng chuỗi mới bạn muốn sử dụng
 
       console.log(item)
       return item;

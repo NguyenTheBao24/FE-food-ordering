@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./../../style/BookNow/BookNow.css";
 import { sendReservationData } from "./../../services/BookNow/BookNow.js"
+import { reverseEasing } from "framer-motion";
 
 function BookNow({ onClose }) {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -24,8 +24,9 @@ function BookNow({ onClose }) {
         status: "Pending"
       };
       try {
-        const response = await sendReservationData(reservationData );
-        
+    
+        await sendReservationData(reservationData);
+
       } catch (error) {
       }
       setPhoneNumber("");
@@ -35,7 +36,7 @@ function BookNow({ onClose }) {
       setIsValidPhoneNumber(true);
       setIsBookingSuccess(true);
       setTimeout(() => {
-        setIsBookingSuccess(false); 
+        setIsBookingSuccess(false);
         onClose()
       }, 3000);
 
