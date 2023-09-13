@@ -30,7 +30,7 @@ export const fetchCustomerDataOrder = async () => {
 }
 
 export const putCustomer = async (reservationData,id) => {
-  // console.log(id);
+  console.log(id);
   try {
       const response = await axios.put(
           "https://pttkpmn05project3-production.up.railway.app/api/booking/set-Table-"+id,

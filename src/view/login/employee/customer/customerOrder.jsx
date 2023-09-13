@@ -19,16 +19,13 @@ function CustomerOrder({ setShowPopup, id }) {
 
     const hannldOut = async () => {
 
-        // console.log('https://pttkpmn05project3-production.up.railway.app/api/booking/set-Table-' + { id });
         const revers = {
-            id: id
-
+            id: id+1
         }
-         await putCustomer(revers, id);
+        await putCustomer(revers, id);
 
 
         setShowPopup(false);
-        console.log(emptyTable);
     }
 
     const handleTableCheckboxChange = (tableId) => {

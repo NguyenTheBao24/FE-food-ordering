@@ -19,16 +19,23 @@ function Customer() {
         fetchData();
     }, []);
 
+    const updateTablesData = async () => {
+        const customer = await fetchCustomerData();
+        setTables(customer);
+    };
+
     // Hàm để xử lý khi đặt bàn
     const reserveTable = (tableId) => {
         setShowPopup(true); // Hiển thị popup
 
         setId(tableId)
-        console.log(id); 
+        console.log(id);
+        // updateTablesData();
+
 
 
     };
- 
+
 
     // Hàm để xử lý khi huỷ bàn
     const cancelTable = (tableId) => {
@@ -87,12 +94,12 @@ function Customer() {
             {
                 showPopup && (
                     <CustomerOrder
-                    
-                    setShowPopup={setShowPopup} 
-                    id={id}
-                    
-                    
-                    />  )
+
+                        setShowPopup={setShowPopup}
+                        id={id}
+
+
+                    />)
             }
         </>
     );
