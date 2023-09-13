@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import {fetchCustomerData} from './../../../../services/login/employee/customer/customer.js'
+import { fetchCustomerData } from './../../../../services/login/employee/customer/customer.js'
 
 import './../../../../style/login/employee/customer.css';
+import CustomerOrder from "./customerOrder.jsx";
 
 function Customer() {
     const [tables, setTables] = useState([]);
-    const [reservedTables, setReservedTables] = useState({});
+    const [id, setId] = useState(0);
+    const [showPopup, setShowPopup] = useState(false); // State để kiểm soát hiển thị popup
+
     useEffect(() => {
         const fetchData = async () => {
-          const customer = await fetchCustomerData();
-          setTables(customer)
+            const customer = await fetchCustomerData();
+            setTables(customer)
         };
-    
+
         fetchData();
-      }, []);
+    }, []);
 
     // Hàm để xử lý khi đặt bàn
     const reserveTable = (tableId) => {
-        const selectedTable = tables.find((table) => table.id === tableId);
+        setShowPopup(true); // Hiển thị popup
 
-        setReservedTables(selectedTable);
-        // Xoá bàn đã đặt ra khỏi danh sách ban đầu
-        const updatedTables = tables.filter((table) => table.id !== tableId);
-        setTables(updatedTables);
+        setId(tableId)
+        console.log(id); 
 
 
     };
+ 
 
     // Hàm để xử lý khi huỷ bàn
     const cancelTable = (tableId) => {
@@ -82,6 +84,16 @@ function Customer() {
                     </table>
                 </div>
             </div>
+            {
+                showPopup && (
+                    <CustomerOrder
+                    
+                    setShowPopup={setShowPopup} 
+                    id={id}
+                    
+                    
+                    />  )
+            }
         </>
     );
 }
