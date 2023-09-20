@@ -51,12 +51,23 @@
 .payment-button:hover{
   background-color: #0056b3;
 }
-
+.newCustomer{
+  background-color: aquamarine;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.newCustomer:hover{
+  background-color:rgb(59, 254, 189) ;
+}
 .add-item-button:hover {
   background-color: #0056b3;
 }
 .upbook-modal-content {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);

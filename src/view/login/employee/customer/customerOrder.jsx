@@ -3,7 +3,7 @@ import './../../../../style/login/employee/customerOrder.css'
 import { fetchCustomerDataOrder, putCustomer } from './../../../../services/login/employee/customer/customer.js'
 
 
-function CustomerOrder({ setShowPopup, id }) {
+function CustomerOrder({ setShowPopup, id ,updateTablesData}) {
     const [emptyTable, setEmtyTable] = useState([])
     const [selectedTable, setSelectedTable] = useState(0); // State để lưu trữ các bàn được chọn
 
@@ -19,13 +19,19 @@ function CustomerOrder({ setShowPopup, id }) {
 
     const hannldOut = async () => {
 
+
+        // console.log('https://pttkpmn05project3-production.up.railway.app/api/booking/set-Table-' + { id });
         const revers = {
-            id: id+1
+            id: selectedTable
+
         }
-        await putCustomer(revers, id);
+        console.log(revers)
+         await putCustomer(revers, id);
 
 
         setShowPopup(false);
+        // console.log(emptyTable);
+        updateTablesData();
     }
 
     const handleTableCheckboxChange = (tableId) => {

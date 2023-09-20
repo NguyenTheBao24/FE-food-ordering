@@ -1,18 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaChair } from "react-icons/fa";
-import { BrowserRouter as Router, useNavigate } from 'react-router-dom'; // Import useHistory và Router từ react-router-dom
 
 import "./../../../../style/login/employee/order.css";
 import MenuOrder from "./menuOrder";
+import { fetchCustomerDataOrder,putTableStatus } from "../../../../services/login/employee/order/order.js";
 import Pay from "./Pay";
 
 function Order() {
-    const [tables, setTables] = useState([
-        { id: 1, name: "Bàn 1", isReserved: true, total: 0 },
-        { id: 2, name: "Bàn 2", isReserved: false, total: 0 },
-        { id: 3, name: "Bàn 3", isReserved: true, total: 0 },
-        { id: 4, name: "Bàn 4", isReserved: false, total: 0 },
-    ]);
+    const [tables, setTables] = useState([]);
+
+    useEffect(() => {
+
+        const fetchdata = async () => {
+            const rever = await fetchCustomerDataOrder()
+            console.log(rever)
+            setTables(rever)
+
+        }
+        fetchdata();
+
+
+
+    }, [])
+
+    const uppdateData= async()=>{
+         
+            const customer = await fetchCustomerDataOrder();
+            setTables(customer);
+        
+    
+    }
 
     const [showAddItemModal, setShowAddItemModal] = useState(false);
     const [openedTableId, setOpenedTableId] = useState(null);
@@ -41,6 +58,13 @@ function Order() {
         setShowAddItemModal(true);
         setOpenedTableId(tableId);
     };
+    const handlAddCustomer = async (tableId)=>{
+        
+        const respon = await  putTableStatus(tableId)
+
+
+        uppdateData()
+    }
 
 
 
@@ -57,6 +81,7 @@ function Order() {
                             <th>ID</th>
                             <th>Tên Bàn</th>
                             <th>Trạng Thái</th>
+                            <th>Sử dụng</th>
                             <th>Gọi món</th>
                             <th>Thanh toán </th>
                         </tr>
@@ -66,21 +91,43 @@ function Order() {
                             <tr key={table.id}>
                                 <td>{table.id}</td>
                                 <td>
-                                    <FaChair className="table-icon" /> {table.name}
+                                    <FaChair className="table-icon" /> Bàn {table.id}
                                 </td>
                                 <td>
-                                    {table.isReserved ? (
-                                        <span style={{ color: "green" }}>Đã Đặt</span>
+                                    {table.status === "Available" ? (
+                                        <span style={{ color: "green" }}>Trống</span>
+                                    ) : table.status === "NotAvailable" ? (
+                                        <span style={{ color: "red" }}>Đang Dùng</span>
                                     ) : (
-                                        <span style={{ color: "red" }}>Trống</span>
+                                        <span style={{ color: "blue" }}>Đã Đặt</span>
                                     )}
                                 </td>
                                 <td>
-                                    <div>
-                                        <button className="add-item-button" onClick={() => handleOpenAddItemModal(table.id)}>
-                                            Thêm món
-                                            <span>{table.total}</span>
+                                    {table.status === "Booked" ? (
+                                        <button className="newCustomer" onClick={() => handlAddCustomer(table.id)}>
+                                            khách offline
                                         </button>
+                                    ) : table.status === "Available" ? (
+                                        <button className="add-item-button" onClick={() => handlAddCustomer(table.id)}>
+                                            khách online
+                                        </button>
+                                    ):null
+                                    }
+
+
+                                </td>
+                                <td>
+                                    <div>
+
+
+                                        {table.status === "NotAvailable" ? (
+                                            <button className="add-item-button" onClick={() => handleOpenAddItemModal(table.id)}>
+                                                Thêm món
+                                                {/* <span>{table.total}</span> */}
+                                            </button>
+                                        ) : null
+                                        }
+
                                         {showAddItemModal && openedTableId === table.id && (
 
                                             <MenuOrder
@@ -96,7 +143,7 @@ function Order() {
                                 <td>
                                     <div className="payment-column">
 
-                                        {table.isReserved ? (
+                                        {table.status === "NotAvailable" ? (
                                             <button className="payment-button" onClick={() => handlePayment(table.id)}>Thanh Toán </button>
                                         ) : null
                                         }

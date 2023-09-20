@@ -30,10 +30,9 @@ export const fetchCustomerDataOrder = async () => {
 }
 
 export const putCustomer = async (reservationData,id) => {
-  console.log(id);
   try {
       const response = await axios.put(
-          "https://pttkpmn05project3-production.up.railway.app/api/booking/set-Table-"+id,
+          "https://pttkpmn05project3-production.up.railway.app/api/booking/reservationId-"+id,
           reservationData
       );
 
@@ -45,3 +44,19 @@ export const putCustomer = async (reservationData,id) => {
 
   }
 };
+export const putCustomerdelete = async ( reservationData,id) => {
+  try {
+      const response = await axios.put(
+          "https://pttkpmn05project3-production.up.railway.app/api/booking/reservationId-"+id+"?delete=true",
+          reservationData
+      );
+
+ 
+      return response.data;
+  } catch (error) {
+
+      throw error
+
+  }
+};
+

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { fetchCustomerData } from './../../../../services/login/employee/customer/customer.js'
+import { fetchCustomerData, putCustomerdelete } from './../../../../services/login/employee/customer/customer.js'
 
 import './../../../../style/login/employee/customer.css';
 import CustomerOrder from "./customerOrder.jsx";
@@ -18,7 +18,6 @@ function Customer() {
 
         fetchData();
     }, []);
-
     const updateTablesData = async () => {
         const customer = await fetchCustomerData();
         setTables(customer);
@@ -29,23 +28,24 @@ function Customer() {
         setShowPopup(true); // Hiển thị popup
 
         setId(tableId)
-        console.log(id);
-        // updateTablesData();
+        // updateTablesData()
 
 
 
     };
 
-
+    // console.log(id); 
     // Hàm để xử lý khi huỷ bàn
-    const cancelTable = (tableId) => {
+    const cancelTable = async (tableId) => {
+        const reversdelete = {
+            id: null
+        }
 
-
-        const updatedTables = tables.filter((table) => table.id !== tableId);
-        setTables(updatedTables);
+        await putCustomerdelete(reversdelete, tableId)
+        updateTablesData()
 
     };
-    console.log(tables);
+    // console.log(tables);
 
 
     return (
@@ -97,6 +97,7 @@ function Customer() {
 
                         setShowPopup={setShowPopup}
                         id={id}
+                        updateTablesData={updateTablesData}
 
 
                     />)
