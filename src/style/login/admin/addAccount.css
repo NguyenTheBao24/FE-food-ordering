@@ -1,0 +1,54 @@
+.addcount{
+    position: fixed;
+    z-index: 100;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.addconten{
+    width: 30%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+.captra{
+    display: flex;
+    justify-content: space-between;
+}
+.addconten div {
+    margin: 10px 0;
+  }
+  
+  .addconten label {
+    color: black;
+    display: block;
+    font-weight: bold;
+  }
+  
+  .addconten input[type="text"],
+  .addconten input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .addconten button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .addconten button:hover {
+    background-color: #0056b3;
+  }

@@ -1,3 +1,24 @@
-.title label{
-    color: black;
-}
+/* CSS */
+.title {
+    margin-bottom: 20px; /* Để thêm khoảng cách dưới phần title */
+  }
+  
+  .title label {
+    font-weight: bold;
+    color: #000; /* Để làm đậm văn bản trong thẻ label */
+    margin-right: 10px; /* Để thêm khoảng cách bên phải của label */
+  }
+  
+  .title select {
+    padding: 5px; /* Để tạo khoảng trống bên trong phần select */
+    border: 1px solid #ccc; /* Để tạo đường viền xung quanh phần select */
+    border-radius: 5px; /* Để làm cho góc bo tròn */
+  }
+  
+  /* Để tạo màu nền khi select được focus */
+  .title select:focus {
+    outline: none; /* Loại bỏ đường viền màu xanh khi focus */
+    border-color: #007bff; /* Màu đường viền khi focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Đổ bóng khi focus */
+  }
+  

@@ -12,7 +12,8 @@ import { Bar } from 'react-chartjs-2';
 import './../../../style/login/admin/turnover.css'
 
 function Turnover() {
-  const [chartType, setChartType] = useState([10, 20, 30, 40, 50, 8, 2]);
+  const [chartType, setChartType] = useState('tuan');
+  const [dataBar ,setDataBar]=useState([10, 20, 30, 40, 50, 8, 2])
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -42,7 +43,7 @@ function Turnover() {
     datasets: [
       {
         label: 'Dataset 1',
-        data: chartType,
+        data: dataBar,
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
 
@@ -51,13 +52,12 @@ function Turnover() {
 
   const handleChartTypeChange = (event) => {
 
-    event.target.value === 'thang' ? setChartType([1,2,3,4,5,6,7,8,9,10,11,12]) : {}
-    // setChartType(event.target.value);
+    event.target.value === 'thang' ? setDataBar([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]) : setDataBar([1, 2, 3, 4, 5, 6, 7])
 
-    event.target.value === 'tuan' ?   setChartType([1,2,3,4,5,6,7]):{}
-
+    event.target.value === 'tuan' ? setDataBar([1, 2, 3, 4, 5, 6, 7]) : setDataBar([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 
+    setChartType(  event.target.value)
 
 
   };
@@ -69,7 +69,6 @@ function Turnover() {
         <select value={chartType} onChange={handleChartTypeChange}>
           <option value="tuan">Theo Tuần</option>
           <option value="thang">Theo Tháng</option>
-       
         </select>
       </div>
       <div className="Bar" style={{ width: '1000px', height: '500px' }} >
