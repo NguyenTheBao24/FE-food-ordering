@@ -3,15 +3,25 @@ import './../../../style/login/admin/account.css'
 import Addaccount from "./addAccount";
 function Account() {
     const [showAdd, setShowAdd] = useState(false)
+    const [sessionId, setSessionId] = useState([])
+    const [selectedItem, setSelectedItem] = useState(null);
 
-    const data = [0, 0, 0, 0]
+
+
+    
+    const handleRadioChange = (index) => {
+        setSelectedItem(index);
+      };
+
+
 
     const handlAdd = () => {
 
 
         setShowAdd(true)
-    }
 
+    }
+    console.log(sessionId);
 
     return (
         <>
@@ -23,21 +33,30 @@ function Account() {
                 <table>
                     <thead>
 
-                        <th>stt</th>
-                        <th>stk</th>
-                        <th></th>
+                        <th>Stt</th>
+                        <th>Stk</th>
+                        <th>Sủ dụng</th>
                     </thead>
                     <tbody>
 
-                        {data.map((item, index) => (
-                            <tr key={index} >
+                        {sessionId.acct_list && sessionId.acct_list.map((item, index) => (
+                            <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{item}</td>
-                                <td></td>
+                                <td>
+                                    <input
+                                        type="radio"
+                                        name="selectedItem"
+                                        value={index}
+                                        checked={selectedItem === index}
+                                        onChange={() => handleRadioChange(index)}
+                                    />
 
-
+                                </td>
                             </tr>
+
                         ))}
+
                     </tbody>
 
 
@@ -48,7 +67,11 @@ function Account() {
 
 
 
-            {showAdd && <Addaccount />}
+            {showAdd && <Addaccount
+                setShowAdd={setShowAdd}
+                setSessionId={setSessionId}
+
+            />}
         </>
     );
 }

@@ -1,16 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './../../../style/login/admin/addAccount.css'
+import { getCaptra, sendAccount } from "../../../services/login/addmin/addmin";
 
-function Addaccount() {
-    // Sử dụng useState để lưu trữ giá trị của các ô input
+
+function Addaccount({ setShowAdd ,setSessionId }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [captcha, setCaptcha] = useState("");
-    
-    // Hàm xử lý khi nút xác nhận được nhấn
-    const handleConfirm = () => {
-        // Thực hiện xác nhận tài khoản tại đây và sử dụng giá trị username, password và captcha
-        // Ví dụ: console.log(username, password, captcha);
+    const [captchaImageBase64,setCaptchaImageBase64]=useState("")
+
+    useEffect(() => {
+
+        const fetchdata = async () => {
+            const captraimg = await getCaptra()
+            // console.log(captraimg)
+            setCaptchaImageBase64(captraimg)
+
+        }
+        fetchdata();
+
+
+
+    }, [])
+
+   
+    const handleConfirm = async () => {
+
+
+        const accountInfo = {
+            username: 'haivuitin',
+            password: 'Hai@123',
+            captcha: captcha,
+        };
+      
+        
+        const sessionId = await sendAccount(accountInfo);
+        console.log(sessionId.data.data[0].acct_list);
+        setSessionId(sessionId.data.data[0])
+        setShowAdd(false);
+        
     }
 
     return (
@@ -29,14 +57,10 @@ function Addaccount() {
                     <input type="text" value={captcha} onChange={(e) => setCaptcha(e.target.value)} />
                 </div>
                 <div className="captra">
-
-
+             
+                    <img src={`data:image/png;base64,${captchaImageBase64}`} alt="CAPTCHA" />
+                </div>
                 <button onClick={handleConfirm}>Xác nhận</button>
-                <div>
-                    
-                </div>
-                </div>
-
             </div>
         </div>
     );
