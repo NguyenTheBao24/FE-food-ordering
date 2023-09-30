@@ -1,33 +1,43 @@
 
+import { PaymentProvider, PaymentContext } from '../../../../routes/context';
+import Account from '../../admin/account';
 import './../../../../style/login/employee/pay.css'
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 
 function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId }) {
     const [paymentMethod, setPaymentMethod] = useState(""); // State để lưu phương thức thanh toán
     const [isPaymentSuccess, setPaymentSuccess] = useState(false); // State để kiểm soát hiển thị popup xác nhận
-
+    const { payment } = useContext(PaymentContext);
+ 
+    console.log(payment)
     const handleClosePay = () => {
         setShowAddItemModalPay(false);
     };
 
     const handlePayment = () => {
         if (paymentMethod === "thanhToanBangThe") {
-         
+
             setPaymentSuccess(true);
         } else if (paymentMethod === "thanhToanBangTienMat") {
-         
+
             setPaymentSuccess(true);
         }
     };
 
     const handleConfirmPayment = () => {
-     
+
         setPaymentSuccess(false); // Ẩn popup xác nhận
         updateTotalPrice(tableId, 0);
         handleClosePay(); // Đóng cửa sổ thanh toán
     };
+   
 
     return (
+      
+<PaymentContext.Provider>
+
+
+      
         <div className="pay-container">
             <div className="popup">
                 <h2>Tổng Tiền Thanh Toán: {totalAmount} VNĐ</h2>
@@ -41,6 +51,7 @@ function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId })
                             onChange={(e) => setPaymentMethod(e.target.value)}
                         />
                         Thanh toán bằng thẻ
+                       
                     </label>
                     <label>
                         <input
@@ -73,8 +84,14 @@ function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId })
                         </button>
                     </div>
                 )}
+                {null && 
+                <Account />
+                
+                }
             </div>
         </div>
+        </PaymentContext.Provider>
+     
     );
 }
 

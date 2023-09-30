@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { FaChair } from "react-icons/fa";
 
 import "./../../../../style/login/employee/order.css";
 import MenuOrder from "./menuOrder";
 import { fetchCustomerDataOrder,putTableStatus } from "../../../../services/login/employee/order/order.js";
 import Pay from "./Pay";
+import { PaymentContext } from "../../../../routes/context";
+
 
 function Order() {
     const [tables, setTables] = useState([]);
-
+    const {payment} = useContext(PaymentContext)
+ 
+ console.log(payment)
     useEffect(() => {
 
         const fetchdata = async () => {
@@ -30,6 +34,8 @@ function Order() {
         
     
     }
+
+   
 
     const [showAddItemModal, setShowAddItemModal] = useState(false);
     const [openedTableId, setOpenedTableId] = useState(null);
@@ -157,6 +163,7 @@ function Order() {
                                                 />
                                             )
                                         }
+                                     
 
                                     </div>
                                 </td>

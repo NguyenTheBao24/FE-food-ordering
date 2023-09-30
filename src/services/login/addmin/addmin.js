@@ -4,7 +4,7 @@ import axios from "axios";
 export const sendAccount = async (reservationData) => {
     try {
         const response = await axios.post(
-            "https://pttkpmn05project3-production.up.railway.app/api/payment/doLogin",
+            "https://pttkpmn05project3-production.up.railway.app/api/LoginBank/doLogin",
             reservationData
         );
         return response;
@@ -17,7 +17,7 @@ export const sendAccount = async (reservationData) => {
 export const getCaptra = async () => {
     try {
         const response = await axios.get(
-            "https://pttkpmn05project3-production.up.railway.app/api/payment/getCaptcha"
+            "https://pttkpmn05project3-production.up.railway.app/api/LoginBank/getCaptcha"
         );
         // console.log(response.data.data.imageString)
         return response.data.data.imageString;

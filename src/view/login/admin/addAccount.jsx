@@ -35,7 +35,7 @@ function Addaccount({ setShowAdd ,setSessionId }) {
       
         
         const sessionId = await sendAccount(accountInfo);
-        console.log(sessionId.data.data[0].acct_list);
+        // console.log(sessionId.data.data[0].acct_list);
         setSessionId(sessionId.data.data[0])
         setShowAdd(false);
         

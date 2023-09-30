@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './style/global.css'
 import App from './view/App';
 import reportWebVitals from './reportWebVitals';
+import { PaymentProvider } from './routes/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
+    <PaymentProvider>
+
     <App />
+    </PaymentProvider>
   </React.StrictMode>
 );
 
