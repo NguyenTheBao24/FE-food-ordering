@@ -1,18 +1,21 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useSelector } from "react-redux";
 import { FaChair } from "react-icons/fa";
 
 import "./../../../../style/login/employee/order.css";
 import MenuOrder from "./menuOrder";
-import { fetchCustomerDataOrder,putTableStatus } from "../../../../services/login/employee/order/order.js";
+import { fetchCustomerDataOrder, putTableStatus } from "../../../../services/login/employee/order/order.js";
 import Pay from "./Pay";
-import { PaymentContext } from "../../../../routes/context";
+
+
 
 
 function Order() {
     const [tables, setTables] = useState([]);
-    const {payment} = useContext(PaymentContext)
- 
- console.log(payment)
+    const payment = useSelector((state) => state.payment);
+
+    console.log(payment)
+
     useEffect(() => {
 
         const fetchdata = async () => {
@@ -27,15 +30,15 @@ function Order() {
 
     }, [])
 
-    const uppdateData= async()=>{
-         
-            const customer = await fetchCustomerDataOrder();
-            setTables(customer);
-        
-    
+    const uppdateData = async () => {
+
+        const customer = await fetchCustomerDataOrder();
+        setTables(customer);
+
+
     }
 
-   
+
 
     const [showAddItemModal, setShowAddItemModal] = useState(false);
     const [openedTableId, setOpenedTableId] = useState(null);
@@ -64,9 +67,9 @@ function Order() {
         setShowAddItemModal(true);
         setOpenedTableId(tableId);
     };
-    const handlAddCustomer = async (tableId)=>{
-        
-        const respon = await  putTableStatus(tableId)
+    const handlAddCustomer = async (tableId) => {
+
+        const respon = await putTableStatus(tableId)
 
 
         uppdateData()
@@ -117,7 +120,7 @@ function Order() {
                                         <button className="add-item-button" onClick={() => handlAddCustomer(table.id)}>
                                             khách online
                                         </button>
-                                    ):null
+                                    ) : null
                                     }
 
 
@@ -163,7 +166,7 @@ function Order() {
                                                 />
                                             )
                                         }
-                                     
+
 
                                     </div>
                                 </td>

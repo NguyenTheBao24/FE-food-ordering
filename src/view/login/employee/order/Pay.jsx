@@ -1,15 +1,13 @@
 
-import { PaymentProvider, PaymentContext } from '../../../../routes/context';
 import Account from '../../admin/account';
 import './../../../../style/login/employee/pay.css'
 import React, { useState,useContext } from "react";
+import { useSelector } from 'react-redux';
 
 function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId }) {
     const [paymentMethod, setPaymentMethod] = useState(""); // State để lưu phương thức thanh toán
     const [isPaymentSuccess, setPaymentSuccess] = useState(false); // State để kiểm soát hiển thị popup xác nhận
-    const { payment } = useContext(PaymentContext);
- 
-    console.log(payment)
+   
     const handleClosePay = () => {
         setShowAddItemModalPay(false);
     };
@@ -34,7 +32,7 @@ function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId })
 
     return (
       
-<PaymentContext.Provider>
+
 
 
       
@@ -90,7 +88,7 @@ function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId })
                 }
             </div>
         </div>
-        </PaymentContext.Provider>
+      
      
     );
 }

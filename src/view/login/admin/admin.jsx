@@ -3,6 +3,7 @@ import { BrowserRouter as Router, useNavigate } from 'react-router-dom'; // Impo
 import './../../../style/login/admin/admin.css'
 import Turnover from "./turnover";
 import Account from "./account";
+import EmployeeAddmin from './Employee'
 
 
 
@@ -45,7 +46,7 @@ function Admin() {
             </div>
             <div className="tab-content">
                 {selectedTab === "turnover" ? <Turnover/> : null}
-                {selectedTab === "employee" ? null : null}
+                {selectedTab === "employee" ? <EmployeeAddmin/> : null}
                 {selectedTab === "Account" ? <Account/> : null}
             </div>
         </div>

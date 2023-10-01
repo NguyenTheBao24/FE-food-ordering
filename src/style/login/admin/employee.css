@@ -1,0 +1,93 @@
+/* employee-management.css */
+
+/* Chung */
+.employee-management {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+}
+
+h1.employee-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Form thêm nhân viên */
+div.add-employee-form {
+  margin-bottom: 20px;
+}
+
+div.add-employee-form input[type="text"] {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+button.add-employee-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button.add-employee-button:hover {
+  background-color: #0056b3;
+}
+
+/* Bảng danh sách nhân viên */
+table.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table.employee-table thead {
+  /* background-color: #007bff; */
+  color: #000;
+}
+
+table.employee-table th {
+  padding: 10px;
+  text-align: left;
+}
+
+table.employee-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+td.employee-id {
+  width: 10%;
+  padding: 10px;
+}
+
+td.employee-name {
+  width: 40%;
+  padding: 10px;
+}
+
+td.employee-position {
+  width: 40%;
+  padding: 10px;
+}
+
+td.employee-action {
+  width: 10%;
+  padding: 10px;
+  text-align: center;
+}
+
+button.delete-employee-button {
+  padding: 8px 16px;
+  background-color: #ff5757;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button.delete-employee-button:hover {
+  background-color: #e24343;
+}

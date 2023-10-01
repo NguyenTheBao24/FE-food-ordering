@@ -13,7 +13,8 @@ import './../../../style/login/admin/turnover.css'
 
 function Turnover() {
   const [chartType, setChartType] = useState('tuan');
-  const [dataBar ,setDataBar]=useState([10, 20, 30, 40, 50, 8, 2])
+  const [dataBarweek ,setDataBarweek]=useState([1,2,3,4,5,6,7]);
+  const [dataBaryear ,setDataBaryear]=useState([12,11,10,9,8,7,6,5,4,3,2,1]);
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -36,14 +37,25 @@ function Turnover() {
     },
   };
 
-  const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-  const data = {
-    labels,
+  const labelsweek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const labelsyear = ['January', 'February', 'March', 'March', 'May', 'June', 'July','August','September','October','October','December'];
+  const dataweek = {
+   labels: labelsweek,
     datasets: [
       {
         label: 'Dataset 1',
-        data: dataBar,
+        data: dataBarweek,
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+
+    ],
+  };
+  const datayear = {
+    labels: labelsyear,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: dataBaryear,
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
 
@@ -52,15 +64,14 @@ function Turnover() {
 
   const handleChartTypeChange = (event) => {
 
-    event.target.value === 'thang' ? setDataBar([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]) : setDataBar([1, 2, 3, 4, 5, 6, 7])
 
-    event.target.value === 'tuan' ? setDataBar([1, 2, 3, 4, 5, 6, 7]) : setDataBar([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-
+  
 
     setChartType(  event.target.value)
 
 
   };
+  console.log(chartType)
 
   return (
     <div>
@@ -72,8 +83,10 @@ function Turnover() {
         </select>
       </div>
       <div className="Bar" style={{ width: '1000px', height: '500px' }} >
-
-        <Bar data={data} options={options} />
+        {
+          chartType === 'tuan' ? <Bar data={dataweek} options={options} />:<Bar data={datayear} options={options} />
+        }
+      
       </div>
     </div>
   );
