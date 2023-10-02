@@ -11,9 +11,8 @@ const paymentSlice = createSlice({
     updatePayment: (state, action) => {
       console.log('New Payment State:', action.payload);
       state.sdt = action.payload.sdt;
-      state.sessionId= action.payload.sessionId
-
-      console.log(' State:2', state.sdt,state.sessionId);
+      state.sessionId = action.payload.sessionId;
+      console.log(' State:2', state.initialState);
     },
   },
 });

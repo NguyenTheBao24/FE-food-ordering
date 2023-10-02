@@ -37,7 +37,7 @@ function Employee() {
                 </button>
             </div>
             <div className="tab-content">
-                {selectedTab === "Order" ? <Order /> : null}
+                {selectedTab === "Order" ? <Order  /> : null}
                 {selectedTab === "Customer" ? <Customer /> : null}
             </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import './../../../style/login/admin/account.css'
 import { PaymentContext } from "../../../routes/context.js";
 import Addaccount from "./addAccount";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Store } from "redux";
 import { updatePayment,paymentSlice } from './../../../redux/paymentSlice';
 // import {paymentSlice} from './../../../redux/store'
@@ -23,12 +23,14 @@ function Account() {
             sessionId: sessionId.sessionId
         }
         console.log(payment)
+        localStorage.setItem('payment', JSON.stringify(payment))
         dispatch(updatePayment(payment))
         // console.log(payment)
 
     };
 
-
+const data =useSelector(state=>state.payment)
+    console.log(data)
     const handlAdd = () => {
 
 

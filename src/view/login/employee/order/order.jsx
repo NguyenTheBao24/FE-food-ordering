@@ -12,15 +12,14 @@ import Pay from "./Pay";
 
 function Order() {
     const [tables, setTables] = useState([]);
-    const payment = useSelector((state) => state.payment);
-
-    console.log(payment)
+    const statea = localStorage.getItem('payment') ? JSON.parse(localStorage.getItem('payment')) : {}
+   console.log(statea);
 
     useEffect(() => {
 
         const fetchdata = async () => {
             const rever = await fetchCustomerDataOrder()
-            console.log(rever)
+     
             setTables(rever)
 
         }
