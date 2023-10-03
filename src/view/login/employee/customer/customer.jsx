@@ -8,8 +8,7 @@ import CustomerOrder from "./customerOrder.jsx";
 function Customer() {
     const [tables, setTables] = useState([]);
     const [id, setId] = useState(0);
-    const [showPopup, setShowPopup] = useState(false); // State để kiểm soát hiển thị popup
-
+    const [showPopup, setShowPopup] = useState(false); 
     useEffect(() => {
         const fetchData = async () => {
             const customer = await fetchCustomerData();
@@ -28,14 +27,13 @@ function Customer() {
         setShowPopup(true); // Hiển thị popup
 
         setId(tableId)
-        // updateTablesData()
+        
 
 
 
     };
 
-    // console.log(id); 
-    // Hàm để xử lý khi huỷ bàn
+    
     const cancelTable = async (tableId) => {
         const reversdelete = {
             id: null
@@ -45,7 +43,7 @@ function Customer() {
         updateTablesData()
 
     };
-    // console.log(tables);
+   
 
 
     return (

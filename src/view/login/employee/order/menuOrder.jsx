@@ -1,13 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./../../../../style/login/employee/menuOrder.css";
+import { handlAddtotal, putTotalPay } from "../../../../services/login/employee/order/order";
 
 
 
-function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many ,datamenu}) {
+function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
     const [menuItems, setMenuItems] = useState(datamenu);
 
-    const [totalPrice, setTotalPrice] = useState(many);
+
+    const [totalPrice, setTotalPrice] = useState(0);
     const [isClosed, setIsClosed] = useState(false);
+    const [additional, setAdditional] = useState([]);
+
+    useEffect(() => {
+        // Định nghĩa một biến state (ví dụ: shouldFetch) để theo dõi liệu có nên gọi API hay không
+        const shouldFetch = true; // Thay đổi giá trị này theo điều kiện của bạn
+
+        // Sử dụng điều kiện shouldFetch để quyết định khi nào nên gọi API
+        if (shouldFetch) {
+            const fetchData = async () => {
+                try {
+                    const getPayment = await putTotalPay(tableId);
+                    setAdditional(getPayment)
+                    const calculatedTotal = getPayment.reduce((total, getPayment) => {
+                        return total + getPayment.total;
+                    }, 0);
+                    setTotalPrice(calculatedTotal);
+
+                } catch (error) {
+                }
+            };
+
+            fetchData();
+        }
+    },[tableId]);
+    console.log(menuItems);
 
     const handleCloseMenuOrder = () => {
 
@@ -15,42 +42,40 @@ function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many ,datam
         setIsClosed(true);
 
 
-        const totalForTable = menuItems.reduce((acc, item) => acc + item.totalPriceForTable, many);
-        updateTotalPrice(tableId, totalForTable);
+
 
     };
 
-    const handleAddItem = (item) => {
-        const menuItem = menuItems.find((menuItem) => menuItem.id === item.id);
+    const handleAddItem = async (item) => {
+        const menuItem = additional.find((menuItem) => menuItem.id === item.id);
+        const customerWithMatchingTableId = datacustomer.find((customer) => customer.tableId === tableId);
+        // menuItem.quantity += 1;
+        console.log(menuItem)
 
-        
-        menuItem.totalPriceForTable += item.price;
-        setMenuItems([...menuItems]);
+        // const rever = {
+        //     menuItem: {
+        //         "id": tableId
+        //     },
+        //     "quantity": menuItem.quantity,
+        // }
+         await handlAddtotal(1, 1)
 
-        calculateTotalPrice();
+
+
+
     };
 
     const handleRemoveItem = (item) => {
-        const menuItem = menuItems.find((menuItem) => menuItem.id === item.id);
+        const menuItem = additional.find((menuItem) => menuItem.id === item.id);
 
 
-        menuItem.quantityRemaining--;
-        menuItem.totalPriceForTable -= item.price;
-        setMenuItems([...menuItems]);
 
-
-        calculateTotalPrice();
-    };
-
-    const calculateTotalPrice = () => {
-        const total = menuItems.reduce(
-            (acc, item) => acc + item.price * item.quantityRemaining,
-            many
-        );
-        setTotalPrice(total);
 
 
     };
+
+
+
 
     return (
         <div className={`upbook-modal ${isClosed ? "closed" : ""}`}>
@@ -61,12 +86,12 @@ function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many ,datam
                         <li key={item.id}>
                             <div className="mon">
 
-                            {item.name} - {item.price} VNĐ
+                                {item.name} - {item.price} VNĐ
                             </div>
                             <div className="maxbtn">
 
-                            <button onClick={() => handleAddItem(item)}>Thêm món</button>
-                            <button onClick={() => handleRemoveItem(item)}>Bớt món</button>
+                                <button onClick={() => handleAddItem(item)}>Thêm món</button>
+                                <button onClick={() => handleRemoveItem(item)}>Bớt món</button>
                             </div>
                         </li>
                     ))}

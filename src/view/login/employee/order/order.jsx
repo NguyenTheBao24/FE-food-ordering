@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { FaChair } from "react-icons/fa";
 import { fetchMenuData } from "../../../../services/nav/menu";
 import "./../../../../style/login/employee/order.css";
 import MenuOrder from "./menuOrder";
-import { fetchCustomerDataOrder, putTableStatus } from "../../../../services/login/employee/order/order.js";
+import { fetchCustomerDataOrder, putTableStatus, putTablethanhtoan,fetchCustomerData } from "../../../../services/login/employee/order/order.js";
 import Pay from "./Pay";
 
 
@@ -12,27 +12,28 @@ import Pay from "./Pay";
 function Order() {
     const [tables, setTables] = useState([]);
     const statea = localStorage.getItem('payment') ? JSON.parse(localStorage.getItem('payment')) : {}
-   console.log(statea);
-   const [dataMenu, setDataMenu] = useState([]);
-    
+    const [dataMenu, setDataMenu] = useState([]);
+    const[datacustomer,setDatacustomer] = useState([]);
+
 
 
     useEffect(() => {
 
         const fetchdata = async () => {
             const rever = await fetchCustomerDataOrder()
-     
             setTables(rever)
             const menuData = await fetchMenuData();
             setDataMenu(menuData);
-
+            const customer = await fetchCustomerData();
+            console.log(customer);
+            setDatacustomer(customer)
         }
         fetchdata();
 
 
 
     }, [])
-    console.log(dataMenu)
+    // console.log(dataMenu)
 
     const uppdateData = async () => {
 
@@ -62,7 +63,6 @@ function Order() {
 
 
     const handlePayment = (tableId) => {
-
         setShowAddItemModalPay(true)
         setOpenedTableIdPay(tableId);
 
@@ -75,6 +75,13 @@ function Order() {
 
         const respon = await putTableStatus(tableId)
 
+
+        uppdateData()
+    }
+
+    const handlthanhtoan = async (tableId) => {
+
+        const respon = await putTablethanhtoan(tableId)
 
         uppdateData()
     }
@@ -136,7 +143,6 @@ function Order() {
                                         {table.status === "NotAvailable" ? (
                                             <button className="add-item-button" onClick={() => handleOpenAddItemModal(table.id)}>
                                                 Thêm món
-                                                {/* <span>{table.total}</span> */}
                                             </button>
                                         ) : null
                                         }
@@ -145,12 +151,9 @@ function Order() {
 
                                             <MenuOrder
                                                 setShowAddItemModal={setShowAddItemModal}
-                                                updateTotalPrice={updateTotalPrice}
                                                 tableId={table.id}
-                                                many={table.total}
                                                 datamenu={dataMenu}
-
-                                            />
+                                                datacustomer={datacustomer}                                            />
                                         )}
                                     </div>
                                 </td>
@@ -163,11 +166,11 @@ function Order() {
                                         }
                                         {
                                             showAddItemModalPay && openedTableIdPay === table.id && (
+
                                                 <Pay
                                                     setShowAddItemModalPay={setShowAddItemModalPay}
-                                                    totalAmount={table.total}
-                                                    updateTotalPrice={updateTotalPrice}
                                                     tableId={table.id}
+                                                    handlthanhtoan={handlthanhtoan}
                                                 />
                                             )
                                         }

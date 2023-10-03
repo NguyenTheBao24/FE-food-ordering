@@ -9,10 +9,10 @@ export const fetchMenuData = async () => {
     const modifiedData = data.map(item => {
       item.imageUrl = 'https://pttkpmn05project3-production.up.railway.app/api/menu/'+item.imageUrl; // Thay 'URL_MỚI' bằng chuỗi mới bạn muốn sử dụng
 
-      console.log(item)
+      // console.log(item)
       return item;
     });
-    console.log(modifiedData);
+    // console.log(modifiedData);
     return modifiedData;
   } catch (error) {
     console.error('Lỗi khi tải dữ liệu từ API:', error);

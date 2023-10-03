@@ -1,12 +1,10 @@
 
-import Account from '../../admin/account';
 import './../../../../style/login/employee/pay.css'
-import React, { useState,useContext } from "react";
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
 
-function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId }) {
-    const [paymentMethod, setPaymentMethod] = useState(""); // State để lưu phương thức thanh toán
-    const [isPaymentSuccess, setPaymentSuccess] = useState(false); // State để kiểm soát hiển thị popup xác nhận
+function Pay({ setShowAddItemModalPay,handlthanhtoan, tableId }) {
+    const [paymentMethod, setPaymentMethod] = useState(""); 
+    const [isPaymentSuccess, setPaymentSuccess] = useState(false); 
    
     const handleClosePay = () => {
         setShowAddItemModalPay(false);
@@ -23,10 +21,11 @@ function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId })
     };
 
     const handleConfirmPayment = () => {
-
-        setPaymentSuccess(false); // Ẩn popup xác nhận
-        updateTotalPrice(tableId, 0);
-        handleClosePay(); // Đóng cửa sổ thanh toán
+        if (isPaymentSuccess) { // Kiểm tra xem đã xác nhận thanh toán chưa
+            setPaymentSuccess(false); // Ẩn popup xác nhận
+            handlthanhtoan(tableId);
+            handleClosePay(); // Đóng cửa sổ thanh toán
+        }// Đóng cửa sổ thanh toán
     };
    
 
@@ -38,7 +37,7 @@ function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId })
       
         <div className="pay-container">
             <div className="popup">
-                <h2>Tổng Tiền Thanh Toán: {totalAmount} VNĐ</h2>
+                <h2>Tổng Tiền Thanh Toán: {} VNĐ</h2>
                 <p>Chọn phương thức thanh toán:</p>
                 <div className="payment-options">
                     <label>
@@ -74,7 +73,7 @@ function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId })
                             paymentMethod === "thanhToanBangThe" ? (
                                 <p> thanh toán bằng thẻ </p>
                             ) : (
-                                <p>thanh toán bằng tiềN mặt </p>
+                                <p>thanh toán bằng tiền mặt </p>
                             )
                         }
                         <button onClick={handleConfirmPayment} className="close-button">
@@ -82,10 +81,7 @@ function Pay({ setShowAddItemModalPay, totalAmount, updateTotalPrice, tableId })
                         </button>
                     </div>
                 )}
-                {null && 
-                <Account />
-                
-                }
+               
             </div>
         </div>
       
