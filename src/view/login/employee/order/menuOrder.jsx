@@ -11,29 +11,32 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
     const [totalPrice, setTotalPrice] = useState(0);
     const [isClosed, setIsClosed] = useState(false);
     const [additional, setAdditional] = useState([]);
+    const tong =()=>{
+        const calculatedTotal = additional.reduce((total, additional) => {
+            return total + additional.total;
+        }, 0);
+        setTotalPrice(calculatedTotal);
+        console.log(additional)
+    }
 
     useEffect(() => {
-        // Định nghĩa một biến state (ví dụ: shouldFetch) để theo dõi liệu có nên gọi API hay không
-        const shouldFetch = true; // Thay đổi giá trị này theo điều kiện của bạn
-
-        // Sử dụng điều kiện shouldFetch để quyết định khi nào nên gọi API
-        if (shouldFetch) {
+   
+    
+       
             const fetchData = async () => {
                 try {
                     const getPayment = await putTotalPay(tableId);
                     setAdditional(getPayment)
-                    const calculatedTotal = getPayment.reduce((total, getPayment) => {
-                        return total + getPayment.total;
-                    }, 0);
-                    setTotalPrice(calculatedTotal);
+                    console.log(additional)
+                    tong();
 
                 } catch (error) {
                 }
             };
 
             fetchData();
-        }
-    },[tableId]);
+        
+    },[additional] );
     console.log(menuItems);
 
     const handleCloseMenuOrder = () => {
@@ -47,26 +50,43 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
     };
 
     const handleAddItem = async (item) => {
-        const menuItem = additional.find((menuItem) => menuItem.id === item.id);
-        const customerWithMatchingTableId = datacustomer.find((customer) => customer.tableId === tableId);
-        // menuItem.quantity += 1;
-        console.log(menuItem)
+        const foundAdditionalItem = additional.find((additional) => additional.menuId === item.id);
+        const foundAddcoustomer = datacustomer.find((customElements) => customElements.tableId === tableId)
 
-        // const rever = {
-        //     menuItem: {
-        //         "id": tableId
-        //     },
-        //     "quantity": menuItem.quantity,
-        // }
-         await handlAddtotal(1, 1)
+        foundAdditionalItem.quantity =   foundAdditionalItem.quantity+1
+
+        const rever = {
+            menuItem: {
+                "id": item.id
+            },
+            "quantity": foundAdditionalItem.quantity ,
+        }
+
+        console.log(foundAddcoustomer)
+        await handlAddtotal(foundAddcoustomer.id, rever)
+        tong()
 
 
 
 
     };
 
-    const handleRemoveItem = (item) => {
-        const menuItem = additional.find((menuItem) => menuItem.id === item.id);
+    const handleRemoveItem = async (item) => {
+        const foundAdditionalItem = additional.find((additional) => additional.menuId === item.id);
+        const foundAddcoustomer = datacustomer.find((customElements) => customElements.tableId === tableId)
+
+        foundAdditionalItem.quantity =   foundAdditionalItem.quantity-1
+
+        const rever = {
+            menuItem: {
+                "id": item.id
+            },
+            "quantity": foundAdditionalItem.quantity ,
+        }
+
+        console.log(foundAddcoustomer)
+        await handlAddtotal(foundAddcoustomer.id, rever)
+        tong()
 
 
 
