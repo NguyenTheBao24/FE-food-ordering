@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const fetchCustomerDataOrder = async () => {
     try {
-      const response = await axios.get('https://pttkpmn05project3-production.up.railway.app/api/table');
+      const response = await axios.get('https://chanlepro.online/api/table');
   
       // console.log(response)
   
@@ -18,7 +18,7 @@ export const fetchCustomerDataOrder = async () => {
 
   export const putTableStatus = async (id) => {
     try {
-      const response = await axios.put('https://pttkpmn05project3-production.up.railway.app/api/table/updateTableStatus-'+id);
+      const response = await axios.put('https://chanlepro.online/api/table/updateTableStatus-'+id);
       
       console.log(response)
       return response.data.data;

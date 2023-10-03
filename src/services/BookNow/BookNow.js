@@ -4,7 +4,7 @@ import axios from "axios";
 export const sendReservationData = async (reservationData) => {
   try {
     const response = await axios.post(
-      "https://pttkpmn05project3-production.up.railway.app/api/booking/add",
+      "https://chanlepro.online/api/booking/add",
       reservationData
     );
     return response.data;

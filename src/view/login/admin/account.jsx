@@ -2,16 +2,13 @@ import React, { useContext, useState } from "react";
 import './../../../style/login/admin/account.css'
 import { PaymentContext } from "../../../routes/context.js";
 import Addaccount from "./addAccount";
-import { useDispatch, useSelector } from 'react-redux';
-import { Store } from "redux";
-import { updatePayment,paymentSlice } from './../../../redux/paymentSlice';
+
 // import {paymentSlice} from './../../../redux/store'
 function Account() {
     const [showAdd, setShowAdd] = useState(false)
     const [sessionId, setSessionId] = useState([])
     const [selectedItem, setSelectedItem] = useState(null);
-    // const { sendPaymentToOrder } = useContext(PaymentContext)
-    const dispatch = useDispatch();
+  
 
 
     const handleRadioChange = (item) => {
@@ -24,13 +21,11 @@ function Account() {
         }
         console.log(payment)
         localStorage.setItem('payment', JSON.stringify(payment))
-        dispatch(updatePayment(payment))
-        // console.log(payment)
+    
 
     };
 
-const data =useSelector(state=>state.payment)
-    console.log(data)
+
     const handlAdd = () => {
 
 

@@ -15,7 +15,7 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    max-width: 600px;
     width: 100%;
   }
   
@@ -27,6 +27,8 @@
   .menu-items  {
     list-style: none;
     padding: 0;
+    max-height: 200px; 
+    overflow-y: auto;
   }
   
   .menu-items li {
@@ -35,7 +37,9 @@
     align-items: center;
     padding: 10px 0;
   }
-  
+  .mon , .maxbtn{
+    max-width: 50%;
+  }
   .menu-items button {
     background: #007bff;
     color: white;
@@ -43,6 +47,8 @@
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
+    margin-left: 10px; 
+    flex: none;
   }
   
   .menu-items button:hover {

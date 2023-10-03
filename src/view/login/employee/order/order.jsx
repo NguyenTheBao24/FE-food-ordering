@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useSelector } from "react-redux";
 import { FaChair } from "react-icons/fa";
-
+import { fetchMenuData } from "../../../../services/nav/menu";
 import "./../../../../style/login/employee/order.css";
 import MenuOrder from "./menuOrder";
 import { fetchCustomerDataOrder, putTableStatus } from "../../../../services/login/employee/order/order.js";
@@ -14,6 +13,9 @@ function Order() {
     const [tables, setTables] = useState([]);
     const statea = localStorage.getItem('payment') ? JSON.parse(localStorage.getItem('payment')) : {}
    console.log(statea);
+   const [dataMenu, setDataMenu] = useState([]);
+    
+
 
     useEffect(() => {
 
@@ -21,6 +23,8 @@ function Order() {
             const rever = await fetchCustomerDataOrder()
      
             setTables(rever)
+            const menuData = await fetchMenuData();
+            setDataMenu(menuData);
 
         }
         fetchdata();
@@ -28,6 +32,7 @@ function Order() {
 
 
     }, [])
+    console.log(dataMenu)
 
     const uppdateData = async () => {
 
@@ -143,6 +148,7 @@ function Order() {
                                                 updateTotalPrice={updateTotalPrice}
                                                 tableId={table.id}
                                                 many={table.total}
+                                                datamenu={dataMenu}
 
                                             />
                                         )}

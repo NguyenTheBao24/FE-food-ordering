@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchCustomerData = async () => {
   try {
-    const response = await axios.get('https://pttkpmn05project3-production.up.railway.app/api/booking?filterByStatus=Pending');
+    const response = await axios.get('https://chanlepro.online/api/booking?filterByStatus=Pending');
 
     // console.log(response)
 
@@ -17,7 +17,7 @@ export const fetchCustomerData = async () => {
 
 export const fetchCustomerDataOrder = async () => {
   try {
-    const response = await axios.get('https://pttkpmn05project3-production.up.railway.app/api/table?filterByStatus=Available');
+    const response = await axios.get('https://chanlepro.online/api/table?filterByStatus=Available');
 
     // console.log(response)
 
@@ -32,7 +32,7 @@ export const fetchCustomerDataOrder = async () => {
 export const putCustomer = async (reservationData,id) => {
   try {
       const response = await axios.put(
-          "https://pttkpmn05project3-production.up.railway.app/api/booking/reservationId-"+id,
+          "https://chanlepro.online/api/booking/reservationId-"+id,
           reservationData
       );
 
@@ -47,7 +47,7 @@ export const putCustomer = async (reservationData,id) => {
 export const putCustomerdelete = async ( reservationData,id) => {
   try {
       const response = await axios.put(
-          "https://pttkpmn05project3-production.up.railway.app/api/booking/reservationId-"+id+"?delete=true",
+          "https://chanlepro.online/api/booking/reservationId-"+id+"?delete=true",
           reservationData
       );
 

@@ -3,12 +3,8 @@ import "./../../../../style/login/employee/menuOrder.css";
 
 
 
-function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many }) {
-    const [menuItems, setMenuItems] = useState([
-        { id: 1, name: "Món 1", price: 10, quantityRemaining: 0, totalPriceForTable: 0 },
-        { id: 2, name: "Món 2", price: 15, quantityRemaining: 0, totalPriceForTable: 0 },
-        { id: 3, name: "Món 3", price: 20, quantityRemaining: 0, totalPriceForTable: 0 },
-    ]);
+function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many ,datamenu}) {
+    const [menuItems, setMenuItems] = useState(datamenu);
 
     const [totalPrice, setTotalPrice] = useState(many);
     const [isClosed, setIsClosed] = useState(false);
@@ -27,7 +23,7 @@ function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many }) {
     const handleAddItem = (item) => {
         const menuItem = menuItems.find((menuItem) => menuItem.id === item.id);
 
-        menuItem.quantityRemaining++;
+        
         menuItem.totalPriceForTable += item.price;
         setMenuItems([...menuItems]);
 
@@ -63,9 +59,15 @@ function MenuOrder({ setShowAddItemModal, updateTotalPrice, tableId, many }) {
                 <ul className="menu-items">
                     {menuItems.map((item) => (
                         <li key={item.id}>
+                            <div className="mon">
+
                             {item.name} - {item.price} VNĐ
+                            </div>
+                            <div className="maxbtn">
+
                             <button onClick={() => handleAddItem(item)}>Thêm món</button>
                             <button onClick={() => handleRemoveItem(item)}>Bớt món</button>
+                            </div>
                         </li>
                     ))}
                 </ul>
