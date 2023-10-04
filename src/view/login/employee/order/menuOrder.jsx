@@ -6,7 +6,6 @@ import { handlAddtotal, putTotalPay } from "../../../../services/login/employee/
 
 function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
     const [menuItems, setMenuItems] = useState(datamenu);
-    console.log(datacustomer)
 
 
     const [totalPrice, setTotalPrice] = useState(0);
@@ -73,6 +72,7 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
         const foundAdditionalItem = additional.find((additional) => additional.menuId === item.id);
         const foundAddcoustomer = datacustomer.find((customElements) => customElements.tableId === tableId)
 
+        if(foundAdditionalItem.quantity ==0) return 0
         foundAdditionalItem.quantity =   foundAdditionalItem.quantity-1
 
         const rever = {

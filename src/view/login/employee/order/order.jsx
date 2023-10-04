@@ -171,6 +171,7 @@ function Order() {
                                                     setShowAddItemModalPay={setShowAddItemModalPay}
                                                     tableId={table.id}
                                                     handlthanhtoan={handlthanhtoan}
+                                                    datacustomer={datacustomer}  
                                                 />
                                             )
                                         }
