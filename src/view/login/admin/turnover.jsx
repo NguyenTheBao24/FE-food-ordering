@@ -13,8 +13,8 @@ import './../../../style/login/admin/turnover.css'
 
 function Turnover() {
   const [chartType, setChartType] = useState('tuan');
-  const [dataBarweek ,setDataBarweek]=useState([1,2,3,4,5,6,7]);
-  const [dataBaryear ,setDataBaryear]=useState([12,11,10,9,8,7,6,5,4,3,2,1]);
+  const [dataBarweek ,setDataBarweek]=useState([1,2,3,100,5,6,7]);
+  const [dataBaryear ,setDataBaryear]=useState([12,11,10,100,8,7,6,5,4,3,2,1]);
   ChartJS.register(
     CategoryScale,
     LinearScale,

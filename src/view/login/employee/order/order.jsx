@@ -125,11 +125,11 @@ function Order() {
                                 <td>
                                     {table.status === "Booked" ? (
                                         <button className="newCustomer" onClick={() => handlAddCustomer(table.id)}>
-                                            khách offline
+                                            khách online
                                         </button>
                                     ) : table.status === "Available" ? (
                                         <button className="add-item-button" onClick={() => handlAddCustomer(table.id)}>
-                                            khách online
+                                            khách offline
                                         </button>
                                     ) : null
                                     }

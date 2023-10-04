@@ -16,7 +16,7 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
             return total + additional.total;
         }, 0);
         setTotalPrice(calculatedTotal);
-        console.log(additional)
+        // console.log(additional)
     }
 
     useEffect(() => {
@@ -27,7 +27,7 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
                 try {
                     const getPayment = await putTotalPay(tableId);
                     setAdditional(getPayment)
-                    console.log(additional)
+                    // console.log(additional)
                     tong();
 
                 } catch (error) {
@@ -37,7 +37,7 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
             fetchData();
         
     },[additional] );
-    console.log(menuItems);
+    // console.log(menuItems);
 
     const handleCloseMenuOrder = () => {
 
@@ -52,7 +52,7 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
     const handleAddItem = async (item) => {
         const foundAdditionalItem = additional.find((additional) => additional.menuId === item.id);
         const foundAddcoustomer = datacustomer.find((customElements) => customElements.tableId === tableId)
-
+        console.log(foundAdditionalItem)
         foundAdditionalItem.quantity =   foundAdditionalItem.quantity+1
 
         const rever = {
@@ -109,7 +109,7 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
                                 {item.name} - {item.price} VNĐ
                             </div>
                             <div className="maxbtn">
-
+                                 <span>{item.quantity} </span>
                                 <button onClick={() => handleAddItem(item)}>Thêm món</button>
                                 <button onClick={() => handleRemoveItem(item)}>Bớt món</button>
                             </div>
