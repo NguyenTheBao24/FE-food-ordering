@@ -4,11 +4,13 @@ import './../../../../style/login/employee/pay.css'
 import React, { useEffect, useState } from "react";
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import QRCode from 'qrcode.react';
 
 function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) {
     const [paymentMethod, setPaymentMethod] = useState("");
     const [isPaymentSuccess, setPaymentSuccess] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [qr,setQr]= useState('')
     useEffect(() => {
         const fettotalPrice = async () => {
             const foundAddcoustomer = datacustomer.find((customElements) => customElements.tableId === tableId)
@@ -20,12 +22,13 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
         const stompClient = Stomp.over(socket);
 
         stompClient.connect({}, (frame) => {
-            // console.log('Kết nối thành công:', frame);
 
          
             stompClient.subscribe('/topic/result', (message) => {
                 const response = JSON.parse(message.body);
-                console.log('Kết quả từ server:', response.qrCode);
+                setQr(response.qrCode)
+                console.log(response.qrCode)
+                console.log(qr)
             });
             const jsonData = {
                 amount: "1000",
@@ -103,7 +106,9 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
 
                         {
                             paymentMethod === "thanhToanBangThe" ? (
-                                <p> thanh toán bằng thẻ </p>
+                                <div className='qr'>
+                                     <QRCode value={qr} />
+                                </div>
                             ) : (
                                 <p>{totalPrice} </p>
                             )

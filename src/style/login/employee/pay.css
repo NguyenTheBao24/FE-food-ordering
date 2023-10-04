@@ -10,6 +10,9 @@
     justify-content: center;
     align-items: center;
   }
+  .qr{
+    margin: 10px auto;
+  }
   
   .popup {
     background-color: #ffffff;
