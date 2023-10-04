@@ -20,12 +20,20 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
         const stompClient = Stomp.over(socket);
 
         stompClient.connect({}, (frame) => {
-            console.log('Kết nối thành công:', frame);
+            // console.log('Kết nối thành công:', frame);
 
          
             stompClient.subscribe('/topic/result', (message) => {
-                console.log('Nhận được tin nhắn từ server:', JSON.parse(message.body));
+                const response = JSON.parse(message.body);
+                console.log('Kết quả từ server:', response.qrCode);
             });
+            const jsonData = {
+                amount: "1000",
+                bankAccount: "0857723969",
+                content: "td123",
+            };
+        
+            stompClient.send("/app/payment", {}, JSON.stringify(jsonData));
         });
     }, [])
 
