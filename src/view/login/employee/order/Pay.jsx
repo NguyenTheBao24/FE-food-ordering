@@ -7,12 +7,12 @@ import Stomp from 'stompjs';
 import QRCode from 'qrcode.react';
 
 function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) {
-    const statea = localStorage.getItem('payment') ? JSON.parse(localStorage.getItem('payment')) : {}
-    // console.log(statea)
     const [paymentMethod, setPaymentMethod] = useState("");
     const [isPaymentSuccess, setPaymentSuccess] = useState(false);
+    const statea = localStorage.getItem('payment') ? JSON.parse(localStorage.getItem('payment')) : {}
+    console.log(statea);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [qr,setQr]= useState('')
+    const [qr, setQr] = useState('')
     useEffect(() => {
         const fettotalPrice = async () => {
             const foundAddcoustomer = datacustomer.find((customElements) => customElements.tableId === tableId)
@@ -20,31 +20,31 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
             setTotalPrice(getPayment)
         }
         fettotalPrice()
-        const socket = new SockJS('https://chanlepro.online/chat'); 
+        const socket = new SockJS('https://chanlepro.online/chat');
         const stompClient = Stomp.over(socket);
 
         stompClient.connect({}, (frame) => {
 
-         
+
             stompClient.subscribe('/topic/result', (message) => {
                 const response = JSON.parse(message.body);
-                    console.log(response);
+                if (qr !== undefined)
                     setQr(response.qrCode)
-                    console.log(response)
-              
+                console.log(response.qrCode)
             });
             const jsonData = {
-                amount: "1000",
-                bankAccount: "0857723969",
-                content: "td123",
+                amount: totalPrice,
+                bankAccount: statea.sdt,
+                content: "",
+                sessionId: statea.sessionId
             };
-        
-            stompClient.send("/app/payment", {}, JSON.stringify(jsonData));
-            stompClient.disconnect();
-        });
-    }, [qr])
 
+            stompClient.send("/app/payment", {}, JSON.stringify(jsonData));
+        });
+    }, [])
     console.log(qr)
+
+
     const handleClosePay = () => {
         setShowAddItemModalPay(false);
     };
@@ -60,10 +60,10 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
     };
 
     const handleConfirmPayment = () => {
-        if (isPaymentSuccess) { 
-            setPaymentSuccess(false); 
+        if (isPaymentSuccess) {
+            setPaymentSuccess(false);
             handlthanhtoan(tableId);
-            handleClosePay(); 
+            handleClosePay();
         }
     };
 
@@ -111,15 +111,20 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
                         {
                             paymentMethod === "thanhToanBangThe" ? (
                                 <div className='qr'>
-                                     <QRCode value={qr} />
+                                    <QRCode value={qr} />
                                 </div>
                             ) : (
-                                <p>{totalPrice} </p>
+                                <div>
+                                    <p>{totalPrice} </p>
+                                    <button onClick={handleConfirmPayment} className="close-button">
+                                        Xác nhận
+                                    </button>
+
+                                </div>
+
                             )
                         }
-                        <button onClick={handleConfirmPayment} className="close-button">
-                            Xác nhận
-                        </button>
+
                     </div>
                 )}
 

@@ -11,7 +11,7 @@ import Pay from "./Pay";
 
 function Order() {
     const [tables, setTables] = useState([]);
-    
+
     const [dataMenu, setDataMenu] = useState([]);
     const[datacustomer,setDatacustomer] = useState([]);
 
