@@ -11,7 +11,7 @@ import Pay from "./Pay";
 
 function Order() {
     const [tables, setTables] = useState([]);
-    const statea = localStorage.getItem('payment') ? JSON.parse(localStorage.getItem('payment')) : {}
+    
     const [dataMenu, setDataMenu] = useState([]);
     const[datacustomer,setDatacustomer] = useState([]);
 

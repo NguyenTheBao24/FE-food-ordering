@@ -4,7 +4,7 @@ import axios from "axios";
 export const sendAccount = async (reservationData) => {
     try {
         const response = await axios.post(
-            "https://chanlepro.online/api/LoginBank/doLogin",
+            "https://chanlepro.online/api/login/doLogin",
             reservationData
         );
         return response;
@@ -45,7 +45,7 @@ export const getEnpoyleee = async () => {
 export const getCaptra = async () => {
     try {
         const response = await axios.get(
-            "https://chanlepro.online/api/LoginBank/getCaptcha"
+            "https://chanlepro.online/api/login/getCaptcha"
         );
         // console.log(response.data.data.imageString)
         return response.data.data.imageString;

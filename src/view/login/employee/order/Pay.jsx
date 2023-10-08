@@ -7,6 +7,8 @@ import Stomp from 'stompjs';
 import QRCode from 'qrcode.react';
 
 function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) {
+    const statea = localStorage.getItem('payment') ? JSON.parse(localStorage.getItem('payment')) : {}
+    // console.log(statea)
     const [paymentMethod, setPaymentMethod] = useState("");
     const [isPaymentSuccess, setPaymentSuccess] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -26,9 +28,10 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
          
             stompClient.subscribe('/topic/result', (message) => {
                 const response = JSON.parse(message.body);
-                setQr(response.qrCode)
-                console.log(response.qrCode)
-                console.log(qr)
+                    console.log(response);
+                    setQr(response.qrCode)
+                    console.log(response)
+              
             });
             const jsonData = {
                 amount: "1000",
@@ -37,10 +40,11 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
             };
         
             stompClient.send("/app/payment", {}, JSON.stringify(jsonData));
+            stompClient.disconnect();
         });
-    }, [])
+    }, [qr])
 
-
+    console.log(qr)
     const handleClosePay = () => {
         setShowAddItemModalPay(false);
     };
