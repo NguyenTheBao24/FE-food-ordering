@@ -10,7 +10,6 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
     const [paymentMethod, setPaymentMethod] = useState("");
     const [isPaymentSuccess, setPaymentSuccess] = useState(false);
     const statea = localStorage.getItem('payment') ? JSON.parse(localStorage.getItem('payment')) : {}
-    console.log(statea);
     const [totalPrice, setTotalPrice] = useState(0);
     const [qr, setQr] = useState('')
     useEffect(() => {
@@ -30,7 +29,7 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
                 const response = JSON.parse(message.body);
                 if (qr !== undefined)
                     setQr(response.qrCode)
-                console.log(response.qrCode)
+                
             });
             const jsonData = {
                 amount: totalPrice,
@@ -42,7 +41,7 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
             stompClient.send("/app/payment", {}, JSON.stringify(jsonData));
         });
     }, [])
-    console.log(qr)
+    // console.log(qr)
 
 
     const handleClosePay = () => {
@@ -64,7 +63,9 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
             setPaymentSuccess(false);
             handlthanhtoan(tableId);
             handleClosePay();
+         
         }
+       
     };
 
 
@@ -76,7 +77,7 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
 
         <div className="pay-container">
             <div className="popup">
-                <h2>Tổng Tiền Thanh Toán: { } VNĐ</h2>
+                <h2>Tổng Tiền Thanh Toán:  VNĐ</h2>
                 <p>Chọn phương thức thanh toán:</p>
                 <div className="payment-options">
                     <label>
@@ -110,8 +111,8 @@ function Pay({ setShowAddItemModalPay, handlthanhtoan, tableId, datacustomer }) 
 
                         {
                             paymentMethod === "thanhToanBangThe" ? (
-                                <div className='qr'>
-                                    <QRCode value={qr} />
+                                <div className='qr' >
+                                    <QRCode value={qr} onLoad={handleConfirmPayment}/>
                                 </div>
                             ) : (
                                 <div>
