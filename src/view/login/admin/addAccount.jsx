@@ -28,8 +28,8 @@ function Addaccount({ setShowAdd ,setSessionId }) {
 
 
         const accountInfo = {
-            username: username,
-            password: password,
+            username: 'vananhlu',
+            password: 'Vanh@3897',
             captcha: captcha,
         };
       

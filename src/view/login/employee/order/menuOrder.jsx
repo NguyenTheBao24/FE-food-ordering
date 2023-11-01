@@ -5,7 +5,7 @@ import { handlAddtotal, putTotalPay } from "../../../../services/login/employee/
 
 
 function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
-    const [menuItems, setMenuItems] = useState(datamenu);
+    
 
 
     const [totalPrice, setTotalPrice] = useState(0);
@@ -72,7 +72,7 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
         const foundAdditionalItem = additional.find((additional) => additional.menuId === item.id);
         const foundAddcoustomer = datacustomer.find((customElements) => customElements.tableId === tableId)
 
-        if(foundAdditionalItem.quantity ==0) return 0
+        if(foundAdditionalItem.quantity === 0) return 0
         foundAdditionalItem.quantity =   foundAdditionalItem.quantity-1
 
         const rever = {
@@ -99,7 +99,7 @@ function MenuOrder({ setShowAddItemModal, tableId, datamenu, datacustomer }) {
             <div className="upbook-modal-content">
                 <h2>Menu Order</h2>
                 <ul className="menu-items">
-                    {menuItems.map((item) => (
+                    {datamenu.map((item) => (
                         <li key={item.id}>
                             <div className="mon">
 

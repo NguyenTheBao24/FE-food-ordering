@@ -25,7 +25,6 @@ function Order() {
             const menuData = await fetchMenuData();
             setDataMenu(menuData);
             const customer = await fetchCustomerData();
-            console.log(customer);
             setDatacustomer(customer)
         }
         fetchdata();
@@ -51,15 +50,7 @@ function Order() {
     const [openedTableIdPay, setOpenedTableIdPay] = useState(null);
 
 
-    const updateTotalPrice = (tableNumber, newTotalPrice) => {
-        const updatedTables = tables.map((table) =>
-            table.id === tableNumber ? { ...table, total: newTotalPrice } : table
-        );
-
-
-        setTables(updatedTables);
-    };
-
+   
 
 
     const handlePayment = (tableId) => {
@@ -73,7 +64,7 @@ function Order() {
     };
     const handlAddCustomer = async (tableId) => {
 
-        const respon = await putTableStatus(tableId)
+        await putTableStatus(tableId)
 
 
         uppdateData()
@@ -81,7 +72,7 @@ function Order() {
 
     const handlthanhtoan = async (tableId) => {
 
-        const respon = await putTablethanhtoan(tableId)
+        await putTablethanhtoan(tableId)
 
         uppdateData()
     }

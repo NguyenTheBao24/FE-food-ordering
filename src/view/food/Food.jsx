@@ -26,6 +26,9 @@ const Food = () => {
                 <li>
                     <AiOutlineUser></AiOutlineUser> Đỗ Hoàng Hải
                 </li>
+                <li>
+                    <AiOutlineUser></AiOutlineUser> Trần Ngọc Quý
+                </li>
             </ul>
 
         </div>
