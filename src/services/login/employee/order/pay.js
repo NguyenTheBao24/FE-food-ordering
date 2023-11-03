@@ -7,7 +7,7 @@ export const putPay = async (id) => {
       
       const calculatedTotal = response.data.data.reduce((total, response) => {
 
-        console.log(total + response.total)
+        // console.log(total + response.total)
         return total + response.total;
     }, 0);
   //  console.log(response.data.data)

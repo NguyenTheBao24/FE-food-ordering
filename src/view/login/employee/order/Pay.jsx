@@ -29,43 +29,45 @@ function Pay({
       const foundAddcoustomer = datacustomer.find(
         (customElements) => customElements.tableId === tableId
       );
-      console.log(foundAddcoustomer.id)
       const getPayment = await putPay(foundAddcoustomer.id);
       setTotalPrice(getPayment);
     };
     fettotalPrice();
-    const socket = new SockJS("https://chanlepro.online/chat");
-    const stompClient = Stomp.over(socket);
-
-    stompClient.connect({}, (frame) => {
-      stompClient.subscribe("/topic/result", (message) => {
-        const response = JSON.parse(message.body);
-
-        console.log(response.status);
-        if (response.status !== undefined) {
-            setPaymentSuccess(false);
-            handlthanhtoan(tableId);
-            handleClosePay();
-        //   console.log("nảxxxx");
-        }
-
-        if (qr !== undefined) {
-          setQr(response.qrCode);
-        }
-      });
-      const jsonData = {
-        amount: totalPrice,
-        bankAccount: statea.sdt,
-        content: "",
-        sessionId: statea.sessionId,
-      };
-
-      stompClient.send("/app/payment", {}, JSON.stringify(jsonData));
-    });
+   
   }, []);
 
   const handlePayment = () => {
     if (paymentMethod === "thanhToanBangThe") {
+
+      const socket = new SockJS("https://chanlepro.online/chat");
+      const stompClient = Stomp.over(socket);
+  
+      stompClient.connect({}, (frame) => {
+        stompClient.subscribe("/topic/result", (message) => {
+          const response = JSON.parse(message.body);
+  
+          console.log(response.status);
+          if (response.status !== undefined) {
+              setPaymentSuccess(false);
+              handlthanhtoan(tableId);
+              handleClosePay();
+          //   console.log("nảxxxx");
+          }
+  
+          if (qr !== undefined) {
+            setQr(response.qrCode);
+          }
+        });
+        const jsonData = {
+          amount: totalPrice,
+          bankAccount: statea.sdt,
+          content: "",
+          sessionId: statea.sessionId,
+        };
+        console.log(jsonData)
+        stompClient.send("/app/payment", {}, JSON.stringify(jsonData));
+      });
+      
       setPaymentSuccess(true);
     } else if (paymentMethod === "thanhToanBangTienMat") {
       setPaymentSuccess(true);
