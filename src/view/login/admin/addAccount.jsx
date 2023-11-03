@@ -28,14 +28,13 @@ function Addaccount({ setShowAdd ,setSessionId }) {
 
 
         const accountInfo = {
-            username: 'vananhlu',
-            password: 'Vanh@3897',
+            username:username ,
+            password: password,
             captcha: captcha,
         };
       
         
         const sessionId = await sendAccount(accountInfo);
-        // console.log(sessionId.data.data[0].acct_list);
         setSessionId(sessionId.data.data[0])
         setShowAdd(false);
         

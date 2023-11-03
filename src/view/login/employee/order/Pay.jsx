@@ -43,9 +43,9 @@ function Pay({
 
         console.log(response.status);
         if (response.status !== undefined) {
-            // setPaymentSuccess(false);
-            // handlthanhtoan(tableId);
-            // handleClosePay();
+            setPaymentSuccess(false);
+            handlthanhtoan(tableId);
+            handleClosePay();
         //   console.log("nảxxxx");
         }
 
